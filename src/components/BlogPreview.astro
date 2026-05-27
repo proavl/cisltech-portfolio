@@ -1,7 +1,7 @@
 ---
 interface Props {
   posts: Array<{
-    slug: string;
+    id: string;
     data: {
       title: string;
       description: string;
@@ -46,10 +46,10 @@ const { posts } = Astro.props;
               )}
             </div>
             <h3 class="bc-title">
-              <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              <a href={`/blog/${post.id}`}>{post.data.title}</a>
             </h3>
             <p class="bc-desc">{post.data.description}</p>
-            <a href={`/blog/${post.slug}`} class="bc-read">
+            <a href={`/blog/${post.id}`} class="bc-read">
               Read more
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>

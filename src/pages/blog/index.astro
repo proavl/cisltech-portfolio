@@ -51,7 +51,7 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags ?? []))];
               </div>
               <div class="bli-content">
                 <h2 class="bli-title">
-                  <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
                 </h2>
                 <p class="bli-desc">{post.data.description}</p>
                 {post.data.tags && (
@@ -61,7 +61,7 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags ?? []))];
                 )}
               </div>
               <div class="bli-arrow">
-                <a href={`/blog/${post.slug}`} aria-label={`Read ${post.data.title}`}>
+                <a href={`/blog/${post.id}`} aria-label={`Read ${post.data.title}`}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
