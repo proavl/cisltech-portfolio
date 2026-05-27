@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 — Page Not Found | Ian Lazala">
+  <div class="not-found">
+    <div class="container">
+      <p class="nf-code section-label">404</p>
+      <h1 class="nf-title">Page not found</h1>
+      <p class="nf-desc">
+        This page doesn't exist or was moved. Let's get you back on track.
+      </p>
+      <a href="/" class="btn btn-primary">Go home</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding-top: 64px;
+  }
+  .nf-code {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+  }
+  .nf-title {
+    margin: 0.5rem 0 1rem;
+  }
+  .nf-desc {
+    margin-bottom: 2rem;
+    max-width: 40ch;
+  }
+</style>

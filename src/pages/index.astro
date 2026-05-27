@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
+import BlogPreview from '../components/BlogPreview.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout>
+  <Hero />
+  <hr class="gradient-line container-hr" />
+  <Projects />
+  <hr class="gradient-line container-hr" />
+  <Skills />
+  <hr class="gradient-line container-hr" />
+  <BlogPreview posts={posts} />
+</BaseLayout>
+
+<style>
+  .container-hr {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+</style>

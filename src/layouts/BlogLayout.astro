@@ -1,0 +1,131 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  tags?: string[];
+}
+
+const { title, description, pubDate, updatedDate, heroImage, tags = [] } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+const formattedUpdated = updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} — Ian Lazala`} description={description}>
+  <article class="blog-article">
+    <div class="container">
+      <div class="blog-back">
+        <a href="/blog" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 5l-7 7 7 7"/>
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+
+      <header class="blog-header">
+        <div class="blog-meta">
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          {updatedDate && <span class="updated">Updated {formattedUpdated}</span>}
+        </div>
+        <h1 class="blog-title">{title}</h1>
+        {description && <p class="blog-desc">{description}</p>}
+        {tags.length > 0 && (
+          <div class="blog-tags">
+            {tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+        )}
+      </header>
+
+      {heroImage && (
+        <div class="blog-hero-img">
+          <img src={heroImage} alt={title} />
+        </div>
+      )}
+
+      <div class="prose blog-content">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-article {
+    padding: 4rem 0 6rem;
+    min-height: 80vh;
+  }
+  .blog-back {
+    margin-bottom: 2.5rem;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+  .blog-header {
+    margin-bottom: 2rem;
+  }
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .updated {
+    color: var(--accent);
+    opacity: 0.7;
+  }
+  .blog-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+    max-width: 18ch;
+    line-height: 1.1;
+  }
+  .blog-desc {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 60ch;
+    margin-bottom: 1.5rem;
+  }
+  .blog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .blog-hero-img {
+    margin: 2.5rem 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .blog-hero-img img {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+  }
+  .blog-content {
+    margin-top: 2rem;
+  }
+</style>

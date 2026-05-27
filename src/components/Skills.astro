@@ -1,0 +1,196 @@
+---
+const skillGroups = [
+  {
+    category: 'Development',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    skills: [
+      { name: 'JavaScript / TypeScript', level: 90 },
+      { name: 'Astro / Next.js', level: 85 },
+      { name: 'React', level: 82 },
+      { name: 'Node.js', level: 80 },
+      { name: 'Python', level: 72 },
+      { name: 'HTML / CSS', level: 95 },
+    ],
+  },
+  {
+    category: 'AV Systems',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>`,
+    skills: [
+      { name: 'Lighting Design & Programming', level: 95 },
+      { name: 'Video Systems', level: 90 },
+      { name: 'Audio Systems', level: 85 },
+      { name: 'Control Systems (Crestron/AMX)', level: 80 },
+      { name: 'Special Effects', level: 78 },
+      { name: 'Commissioning & QA', level: 95 },
+    ],
+  },
+  {
+    category: 'Infrastructure',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,
+    skills: [
+      { name: 'GitHub / Git', level: 88 },
+      { name: 'CI/CD (GitHub Actions)', level: 82 },
+      { name: 'Linux / Shell', level: 78 },
+      { name: 'Docker', level: 70 },
+      { name: 'Networking & IP Systems', level: 85 },
+    ],
+  },
+  {
+    category: 'Design & Tools',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>`,
+    skills: [
+      { name: 'AutoCAD / Vectorworks', level: 78 },
+      { name: 'WordPress / CMS', level: 85 },
+      { name: 'Figma / UI Design', level: 70 },
+      { name: 'Project Management', level: 92 },
+    ],
+  },
+];
+
+const techStack = [
+  'JavaScript', 'TypeScript', 'Astro', 'React', 'Next.js', 'Node.js',
+  'Python', 'HTML5', 'CSS3', 'Git', 'GitHub Actions', 'Docker',
+  'Linux', 'WordPress', 'Figma', 'AutoCAD',
+  'DMX512', 'ArtNet', 'sACN', 'Dante', 'AVB',
+  'Crestron', 'AMX', 'QSC', 'd&b audiotechnik',
+];
+---
+
+<section class="section" id="skills">
+  <div class="container">
+    <p class="section-label">Toolkit</p>
+    <h2 class="section-title">Skills <span>&amp; Expertise</span></h2>
+    <p class="section-desc">
+      Spanning full-stack web development, AV systems integration, and digital infrastructure.
+    </p>
+
+    <div class="skills-grid">
+      {skillGroups.map(group => (
+        <div class="card skill-group">
+          <div class="sg-header">
+            <div class="sg-icon" set:html={group.icon} />
+            <h3 class="sg-title">{group.category}</h3>
+          </div>
+          <ul class="sg-list">
+            {group.skills.map(skill => (
+              <li class="sg-item">
+                <div class="sg-item-top">
+                  <span class="sg-name">{skill.name}</span>
+                  <span class="sg-pct">{skill.level}%</span>
+                </div>
+                <div class="sg-bar-track">
+                  <div class="sg-bar-fill" style={`--level: ${skill.level}%`}></div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Tech cloud -->
+    <div class="tech-cloud">
+      <p class="section-label">Technologies</p>
+      <div class="tech-tags">
+        {techStack.map(tech => (
+          <span class="tech-tag">{tech}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .skill-group {
+    padding: 1.75rem;
+  }
+
+  .sg-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .sg-icon {
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .sg-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .sg-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .sg-item { display: flex; flex-direction: column; gap: 0.4rem; }
+  .sg-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sg-name {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .sg-pct {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+  .sg-bar-track {
+    height: 3px;
+    background: var(--border-hl);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .sg-bar-fill {
+    height: 100%;
+    width: var(--level);
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 99px;
+    transition: width 1s ease;
+  }
+
+  .tech-cloud { margin-top: 1rem; }
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .tech-tag {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.78rem;
+    font-family: var(--mono);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    background: var(--bg-card);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .tech-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+</style>
